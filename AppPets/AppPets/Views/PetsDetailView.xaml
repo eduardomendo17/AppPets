@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppPets.Views.PetsDetailView"
+             Title="Detalle de la mascota">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Eliminar" Clicked="ToolbarDelete_Clicked" />
+        <ToolbarItem Text="Guardar" Clicked="ToolbarSave_Clicked" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+
+        <TableView
+            Intent="Form">
+            <TableView.Root>
+                <TableSection>
+                    <EntryCell x:Name="EntryName" Label="Nombre" Text="{Binding Pet.Name}" />
+                    <EntryCell x:Name="EntryBreed" Label="Raza" Text="{Binding Pet.Breed}" />
+                    <EntryCell x:Name="EntryAge" Label="Edad" Keyboard="Numeric" Text="{Binding Pet.Age}" />
+                    <EntryCell x:Name="EntryPicture" Label="Url Imagen" Text="{Binding Pet.Picture}" />
+                    <ImageCell x:Name="ImagePicture" ImageSource="{Binding Pet.Picture}" />
+                </TableSection>
+            </TableView.Root>
+        </TableView>
+
+    </ContentPage.Content>
+</ContentPage>
