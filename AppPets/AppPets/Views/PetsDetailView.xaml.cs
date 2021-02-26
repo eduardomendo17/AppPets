@@ -17,20 +17,20 @@ namespace AppPets.Views
         /*PetsListView _PetsListView;
         PetModel PetSelected;*/
 
-        public PetsDetailView()
+        public PetsDetailView(PetsViewModel petsViewModel)
         {
             InitializeComponent();
 
-            BindingContext = new PetsDetailViewModel();
+            BindingContext = new PetsDetailViewModel(petsViewModel);
 
             //_PetsListView = petsListView;
         }
 
-        public PetsDetailView(PetModel pet)
+        public PetsDetailView(PetsViewModel petsViewModel, PetModel pet)
         {
             InitializeComponent();
 
-            BindingContext = new PetsDetailViewModel(pet);
+            BindingContext = new PetsDetailViewModel(petsViewModel, pet);
 
             /*_PetsListView = petsListView;
 
@@ -38,9 +38,9 @@ namespace AppPets.Views
             FillPet(pet);*/
         }
 
-        private void ToolbarSave_Clicked(object sender, EventArgs e)
+        /*private void ToolbarSave_Clicked(object sender, EventArgs e)
         {
-            /*if (PetSelected != null && PetSelected.ID > 0)
+            if (PetSelected != null && PetSelected.ID > 0)
             {
                 // Actualizar
                 foreach(PetModel pet in App.Pets)
@@ -69,7 +69,7 @@ namespace AppPets.Views
 
             _PetsListView.RefreshPets();
 
-            Navigation.PopAsync();*/
+            Navigation.PopAsync();
         }
 
         private void ToolbarDelete_Clicked(object sender, EventArgs e)
@@ -94,10 +94,10 @@ namespace AppPets.Views
 
                 _PetsListView.RefreshPets();
                 Navigation.PopAsync();
-            }*/
+            }
         }
 
-        /*private void FillPet(PetModel pet)
+        private void FillPet(PetModel pet)
         {
             EntryName.Text = pet.Name;
             EntryBreed.Text = pet.Breed;

@@ -5,8 +5,8 @@
              Title="Detalle de la mascota">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Eliminar" Clicked="ToolbarDelete_Clicked" />
-        <ToolbarItem Text="Guardar" Clicked="ToolbarSave_Clicked" />
+        <ToolbarItem Text="Eliminar" Command="{Binding DeleteCommand}" />
+        <ToolbarItem Text="Guardar" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
@@ -15,11 +15,11 @@
             Intent="Form">
             <TableView.Root>
                 <TableSection>
-                    <EntryCell x:Name="EntryName" Label="Nombre" Text="{Binding Pet.Name}" />
-                    <EntryCell x:Name="EntryBreed" Label="Raza" Text="{Binding Pet.Breed}" />
-                    <EntryCell x:Name="EntryAge" Label="Edad" Keyboard="Numeric" Text="{Binding Pet.Age}" />
-                    <EntryCell x:Name="EntryPicture" Label="Url Imagen" Text="{Binding Pet.Picture}" />
-                    <ImageCell x:Name="ImagePicture" ImageSource="{Binding Pet.Picture}" />
+                    <EntryCell x:Name="EntryName" Label="Nombre" Text="{Binding PetName}" />
+                    <EntryCell x:Name="EntryBreed" Label="Raza" Text="{Binding PetBreed}" />
+                    <EntryCell x:Name="EntryAge" Label="Edad" Keyboard="Numeric" Text="{Binding PetAge}" />
+                    <EntryCell x:Name="EntryPicture" Label="Url Imagen" Text="{Binding PetPicture}" />
+                    <ImageCell x:Name="ImagePicture" ImageSource="{Binding PetPicture}" />
                 </TableSection>
             </TableView.Root>
         </TableView>

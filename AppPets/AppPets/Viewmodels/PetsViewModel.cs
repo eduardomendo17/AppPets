@@ -1,18 +1,32 @@
 ﻿using AppPets.Models;
+using AppPets.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace AppPets.Viewmodels
 {
     public class PetsViewModel : BaseViewModel
     {
+        Command _NewCommand;
+        public Command NewCommand => _NewCommand ?? (_NewCommand = new Command(NewAction));
+
+        Command _SelectCommand;
+        public Command SelectCommand => _SelectCommand ?? (_SelectCommand = new Command(SelectAction));
 
         List<PetModel> _PetsList;
         public List<PetModel> PetsList
         {
             get => _PetsList;
             set => SetProperty(ref _PetsList, value);
+        }
+
+        PetModel _PetSelected;
+        public PetModel PetSelected
+        {
+            get => _PetSelected;
+            set => SetProperty(ref _PetSelected, value);
         }
 
         public PetsViewModel()
@@ -46,6 +60,23 @@ namespace AppPets.Viewmodels
             };
 
             PetsList = App.Pets;
+        }
+
+        public void PetsRefresh()
+        {
+            PetsList = null;
+            PetsList = App.Pets;
+        }
+
+        private void NewAction(object obj)
+        {
+            //await Application.Current.MainPage.DisplayAlert("AppPets", "Generando una nueva mascota...", "Ok");
+            Application.Current.MainPage.Navigation.PushAsync(new PetsDetailView(this));
+        }
+
+        private void SelectAction(object obj)
+        {
+            Application.Current.MainPage.Navigation.PushAsync(new PetsDetailView(this, PetSelected));
         }
     }
 }

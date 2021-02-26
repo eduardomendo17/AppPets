@@ -51,7 +51,7 @@ namespace AppPets.Views
             PetsList.ItemsSource = App.Pets;*/
         }
 
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        /*private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new PetsDetailView());
         }
@@ -70,6 +70,6 @@ namespace AppPets.Views
         {
             PetsList.ItemsSource = null;
             PetsList.ItemsSource = App.Pets;
-        }
+        }*/
     }
 }

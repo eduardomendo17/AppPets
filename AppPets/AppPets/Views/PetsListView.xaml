@@ -5,7 +5,7 @@
              Title="AppPets">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Nuevo" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem Text="Nuevo" Command="{Binding NewCommand}" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
@@ -15,8 +15,9 @@
             <CollectionView 
                 x:Name="PetsList"
                 ItemsSource="{Binding PetsList}"
-                SelectionMode="Single"
-                SelectionChanged="PetsList_SelectionChanged">
+                SelectionChangedCommand="{Binding SelectCommand}"
+                SelectedItem="{Binding PetSelected}"
+                SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
