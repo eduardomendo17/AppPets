@@ -13,7 +13,7 @@ namespace AppPets.Triggers
             bool isNumeric = int.TryParse(sender.Text, out n);
             if (string.IsNullOrWhiteSpace(sender.Text) || !isNumeric)
             { // No es numérico
-                sender.Text = ""; // texto anterior
+                sender.Text = "";
             }
             else
             { // Es numérico
