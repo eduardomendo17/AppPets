@@ -1,4 +1,5 @@
 ﻿using AppPets.Models;
+using AppPets.Services;
 using AppPets.Views;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,9 @@ namespace AppPets.Viewmodels
 {
     public class PetsViewModel : BaseViewModel
     {
+        Command _LoadCommand;
+        public Command LoadCommand => _LoadCommand ?? (_LoadCommand = new Command(LoadAction));
+
         Command _NewCommand;
         public Command NewCommand => _NewCommand ?? (_NewCommand = new Command(NewAction));
 
@@ -31,7 +35,7 @@ namespace AppPets.Viewmodels
 
         public PetsViewModel()
         {
-            App.Pets = new List<PetModel>
+            /*App.Pets = new List<PetModel>
             {
                 new PetModel
                 {
@@ -59,13 +63,31 @@ namespace AppPets.Viewmodels
                 }
             };
 
-            PetsList = App.Pets;
+            PetsList = App.Pets;*/
+            LoadPets();
+        }
+
+        private async void LoadPets()
+        {
+            ApiResponse response = await new ApiService().GetDataAsync<PetModel>("Pets");
+            if (response == null || !response.IsSuccess)
+            {
+                await Application.Current.MainPage.DisplayAlert("AppPets", $"Error al cargar las mascotas {response.Message}", "Ok");
+                return;
+            }
+            PetsList = (List<PetModel>)response.Result;
         }
 
         public void PetsRefresh()
         {
-            PetsList = null;
-            PetsList = App.Pets;
+            /*PetsList = null;
+            PetsList = App.Pets;*/
+            LoadPets();
+        }
+
+        private void LoadAction()
+        {
+            LoadPets();
         }
 
         private void NewAction(object obj)

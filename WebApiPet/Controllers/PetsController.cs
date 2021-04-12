@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApiPet.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,36 +14,46 @@ namespace WebApiPet.Controllers
     [ApiController]
     public class PetsController : ControllerBase
     {
-        // GET: api/<PetsController>
+        private readonly IConfiguration Configuration;
+
+        public PetsController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        // GET: <PetsController>
         [HttpGet]
-        public string Get()
+        public List<PetModel> Get()
         {
-            return "Verbo GET sin parámetro";
+            return new PetModel().GetAll(Configuration.GetConnectionString("MySQL"));
         }
 
-        // GET api/<PetsController>/5
-        [HttpGet("{id}/{nombre}")]
-        public string Get(int id, string nombre)
+        // GET <PetsController>/5
+        [HttpGet("{id}")]
+        public PetModel Get(int id)
         {
-            return $"Hola {nombre}, estas ejecutando el verbo GET con parámetro {id}";
+            return new PetModel().Get(Configuration.GetConnectionString("MySQL"), id);
         }
 
-        // POST api/<PetsController>
+        // POST <PetsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ApiResponse Post([FromBody] PetModel pet)
         {
+            return pet.Insert(Configuration.GetConnectionString("MySQL"));
         }
 
-        // PUT api/<PetsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT <PetsController>/5
+        [HttpPut]
+        public ApiResponse Put([FromBody] PetModel pet)
         {
+            return pet.Update(Configuration.GetConnectionString("MySQL"));
         }
 
-        // DELETE api/<PetsController>/5
+        // DELETE <PetsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ApiResponse Delete(int id)
         {
+            return new PetModel().Delete(Configuration.GetConnectionString("MySQL"), id);
         }
     }
 }

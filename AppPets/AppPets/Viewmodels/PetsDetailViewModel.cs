@@ -1,4 +1,5 @@
 ﻿using AppPets.Models;
+using AppPets.Services;
 using Plugin.Media;
 using System;
 using System.Collections.Generic;
@@ -103,9 +104,9 @@ namespace AppPets.Viewmodels
             PetPicture = pet.Picture;
         }
 
-        private void SaveAction()
+        private async void SaveAction()
         {
-            if (_PetID > 0)
+            /*if (_PetID > 0)
             {
                 // Actualizar
                 foreach (PetModel pet in App.Pets)
@@ -132,36 +133,85 @@ namespace AppPets.Viewmodels
                     Age = PetAge,
                     Picture = PetPicture
                 });
+            }*/
+
+            ApiResponse response;
+            try
+            {
+                PetModel pet = new PetModel 
+                {
+                    ID = _PetID,
+                    Name = PetName,
+                    Breed = PetBreed,
+                    Age = PetAge,
+                    Picture = PetPicture
+                };
+                if (pet.ID > 0)
+                {
+                    // Actualizar
+                    response = await new ApiService().PutDataAsync("Pets", pet);
+                }
+                else
+                {
+                    // Insertar
+                    response = await new ApiService().PostDataAsync("Pets", pet);
+                }
+                if (response == null || !response.IsSuccess)
+                {
+                    await Application.Current.MainPage.DisplayAlert("AppPets", $"Error al procesar la mascota {response.Message}", "Ok");
+                    return;
+                }
+
+                PetsViewModel.PetsRefresh();
+
+                Application.Current.MainPage.Navigation.PopAsync();
             }
+            catch (Exception)
+            {
 
-            PetsViewModel.PetsRefresh();
-
-            Application.Current.MainPage.Navigation.PopAsync();
+                throw;
+            }
         }
 
-        private void DeleteAction()
+        private async void DeleteAction()
         {
             if (_PetID > 0)
             {
                 // Eliminar
 
                 // Opción 1
-                List<PetModel> petsNew = new List<PetModel>();
-                foreach (PetModel pet in App.Pets)
-                {
-                    if (pet.ID != _PetID)
-                    {
-                        petsNew.Add(pet);
-                    }
-                }
-                App.Pets = petsNew;
+                /*List<PetModel> petsNew = new List<PetModel>();
+                 foreach (PetModel pet in App.Pets)
+                 {
+                     if (pet.ID != _PetID)
+                     {
+                         petsNew.Add(pet);
+                     }
+                 }
+                 App.Pets = petsNew;*/
 
                 // Opción 2
                 /*App.Pets.Remove(PetSelected);*/
 
-                PetsViewModel.PetsRefresh();
+                // Api
+                ApiResponse response;
+                try
+                {
+                    response = await new ApiService().DeleteDataAsync("Pets", _PetID);
+                    if (response == null || !response.IsSuccess)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("AppPets", $"Error al eliminar la mascota {response.Message}", "Ok");
+                        return;
+                    }
 
-                Application.Current.MainPage.Navigation.PopAsync();
+                    PetsViewModel.PetsRefresh();
+
+                    Application.Current.MainPage.Navigation.PopAsync();
+                }
+                catch (Exception exc)
+                {
+                    await Application.Current.MainPage.DisplayAlert("AppPets", $"Error al eliminar la mascota {exc.Message}", "Ok");
+                }
             }
         }
 

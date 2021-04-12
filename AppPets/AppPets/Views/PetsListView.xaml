@@ -5,6 +5,7 @@
              Title="AppPets">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cargar" Command="{Binding LoadCommand}" />
         <ToolbarItem Text="Nuevo" Command="{Binding NewCommand}" />
     </ContentPage.ToolbarItems>
     
@@ -31,22 +32,22 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Image
-                            Grid.RowSpan="3"
-                            HeightRequest="50"
-                            Source="{Binding Picture}" />
+                                Grid.RowSpan="3"
+                                HeightRequest="50"
+                                Source="{Binding Picture}" />
                             <Label 
-                            Grid.Column="2"
-                            Grid.Row="1"
-                            FontAttributes="Bold"
-                            Text="{Binding Name}" />
+                                Grid.Column="2"
+                                Grid.Row="1"
+                                FontAttributes="Bold"
+                                Text="{Binding Name}" />
                             <Label
-                            Grid.Column="2"
-                            Grid.Row="2"
-                            Text="{Binding Breed}" />
+                                Grid.Column="2"
+                                Grid.Row="2"
+                                Text="{Binding Breed}" />
                             <Label
-                            Grid.Column="2"
-                            Grid.Row="3"
-                            Text="{Binding Age, StringFormat='{0} años'}" />
+                                Grid.Column="2"
+                                Grid.Row="3"
+                                Text="{Binding Age, StringFormat='{0} años'}" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
