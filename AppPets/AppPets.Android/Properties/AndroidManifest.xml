@@ -8,7 +8,7 @@
     android:label="AppPets.Android" 
     android:theme="@style/MainTheme"
     android:usesCleartextTraffic="true">
-    <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAhtaLof2dnftWAJrcjAKGTl0BcWOCqh08" />
+    <meta-data android:name="com.google.android.geo.API_KEY" android:value="API_KEY" />
     <provider 
       android:name="androidx.core.content.FileProvider"
       android:authorities="${applicationId}.fileprovider"

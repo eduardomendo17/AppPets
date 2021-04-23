@@ -21,7 +21,7 @@ namespace AppPets.UWP
         {
             this.InitializeComponent();
 
-            Xamarin.FormsMaps.Init("ArnZxmXEBBcbO7Ga1yYm1E4MefEWEuiMDU6_80rEZSoqFBOCl4rsAiRk77ch8fXe");
+            Xamarin.FormsMaps.Init("API_KEY");
 
             LoadApplication(new AppPets.App());
         }
