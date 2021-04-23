@@ -18,8 +18,12 @@ namespace WebApiPet.Models
 
         public string Picture { get; set; }
 
+        public double Latitude { get; set; }
 
-        public List<PetModel> GetAll(string connectionString)
+        public double Longitude { get; set; }
+
+
+        public ApiResponse GetAll(string connectionString)
         {
             List<PetModel> list = new List<PetModel>();
             try
@@ -40,21 +44,33 @@ namespace WebApiPet.Models
                                     Name = reader["Name"].ToString(),
                                     Breed = reader["Breed"].ToString(),
                                     Age = int.Parse(reader["Age"].ToString()),
-                                    Picture = reader["Picture"].ToString()
+                                    Picture = reader["Picture"].ToString(),
+                                    Latitude = double.Parse(reader["Latitude"].ToString()),
+                                    Longitude = double.Parse(reader["Longitude"].ToString())
                                 }); 
                             }
                         }
                     }
                 }
+                return new ApiResponse
+                {
+                    IsSuccess = true,
+                    Message = "Las mascotas fueron obtenidas con éxito",
+                    Result = list
+                };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                return new ApiResponse
+                {
+                    IsSuccess = false,
+                    Message = $"Se generó un error al consultar las mascotas ({ex.Message})",
+                    Result = null
+                };
             }
-            return list;
         }
 
-        public PetModel Get(string connectionString, int id)
+        public ApiResponse Get(string connectionString, int id)
         {
             PetModel obj = new PetModel();
             try
@@ -76,18 +92,30 @@ namespace WebApiPet.Models
                                     Name = reader["Name"].ToString(),
                                     Breed = reader["Breed"].ToString(),
                                     Age = int.Parse(reader["Age"].ToString()),
-                                    Picture = reader["Picture"].ToString()
+                                    Picture = reader["Picture"].ToString(),
+                                    Latitude = double.Parse(reader["Latitude"].ToString()),
+                                    Longitude = double.Parse(reader["Longitude"].ToString())
                                 };
                             }
                         }
                     }
                 }
+                return new ApiResponse
+                {
+                    IsSuccess = true,
+                    Message = "La mascota fue obtenida con éxito",
+                    Result = obj
+                };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                return new ApiResponse
+                {
+                    IsSuccess = false,
+                    Message = $"Se generó un error al consultar la mascota ({ex.Message})",
+                    Result = null
+                };
             }
-            return obj;
         }
 
         public ApiResponse Insert(string connectionString)

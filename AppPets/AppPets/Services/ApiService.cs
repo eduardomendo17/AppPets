@@ -12,7 +12,7 @@ namespace AppPets.Services
     {
         private string ApiUrl = "http://192.168.14.40/WebApiPet/"; //"https://localhost:44399/";
 
-        public async Task<ApiResponse> GetDataAsync<T>(string controller)
+        public async Task<ApiResponse> GetDataAsync(string controller)
         {
             try
             {
@@ -32,13 +32,7 @@ namespace AppPets.Services
                     };
                 }
 
-                var data = JsonConvert.DeserializeObject<List<T>>(result);
-                return new ApiResponse
-                {
-                    IsSuccess = true,
-                    Message = "Los datos fueron obtenidos de manera exitosa",
-                    Result = data
-                };
+                return JsonConvert.DeserializeObject<ApiResponse>(result);
             }
             catch (Exception ex)
             {

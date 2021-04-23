@@ -1,5 +1,6 @@
 ﻿using AppPets.Models;
 using AppPets.Services;
+using AppPets.Views;
 using Plugin.Media;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,9 @@ namespace AppPets.Viewmodels
 
         Command _DeleteCommand;
         public Command DeleteCommand => _DeleteCommand ?? (_DeleteCommand = new Command(DeleteAction));
+
+        Command _MapCommand;
+        public Command MapCommand => _MapCommand ?? (_MapCommand = new Command(MapAction));
 
         Command _GetLocationCommand;
         public Command GetLocationCommand=> _GetLocationCommand ?? (_GetLocationCommand = new Command(GetLocationAction));
@@ -102,6 +106,8 @@ namespace AppPets.Viewmodels
             PetBreed = pet.Breed;
             PetAge = pet.Age;
             PetPicture = pet.Picture;
+            PetLongitude = pet.Longitude;
+            PetLatitude = pet.Latitude;
         }
 
         private async void SaveAction()
@@ -171,6 +177,21 @@ namespace AppPets.Viewmodels
 
                 throw;
             }
+        }
+
+        private void MapAction()
+        {
+            Application.Current.MainPage.Navigation.PushAsync(
+                new PetsMapsView(new PetModel {
+                    ID = _PetID,
+                    Name = PetName,
+                    Breed = PetBreed,
+                    Age = PetAge,
+                    Picture = PetPicture,
+                    Latitude = PetLatitude,
+                    Longitude = PetLongitude
+                })
+            );;
         }
 
         private async void DeleteAction()
