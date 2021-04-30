@@ -21,7 +21,7 @@ namespace AppPets.UWP
         {
             this.InitializeComponent();
 
-            Xamarin.FormsMaps.Init("API_KEY");
+            Xamarin.FormsMaps.Init("BINGS_MAP_API_KEY");
 
             LoadApplication(new AppPets.App());
         }

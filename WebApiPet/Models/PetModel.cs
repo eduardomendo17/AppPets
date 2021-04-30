@@ -126,7 +126,7 @@ namespace WebApiPet.Models
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
                     conn.Open();
-                    string tsql = "INSERT INTO Pet (Name, Breed, Age, Picture) VALUES(@Name, @Breed, @Age, @Picture); SELECT LAST_INSERT_ID();";
+                    string tsql = "INSERT INTO Pet (Name, Breed, Age, Picture, Latitude, Longitude) VALUES(@Name, @Breed, @Age, @Picture, @Latitude, @Longitude); SELECT LAST_INSERT_ID();";
                     using (MySqlCommand cmd = new MySqlCommand(tsql, conn))
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
@@ -134,6 +134,8 @@ namespace WebApiPet.Models
                         cmd.Parameters.AddWithValue("@Breed", Breed);
                         cmd.Parameters.AddWithValue("@Age", Age);
                         cmd.Parameters.AddWithValue("@Picture", Picture);
+                        cmd.Parameters.AddWithValue("@Latitude", Latitude);
+                        cmd.Parameters.AddWithValue("@Longitude", Longitude);
                         newID = cmd.ExecuteScalar();
                         if (newID != null && newID.ToString().Length > 0)
                         {
@@ -174,7 +176,7 @@ namespace WebApiPet.Models
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
                     conn.Open();
-                    string tsql = "UPDATE Pet SET Name = @Name, Breed = @Breed, Age = @Age, Picture = @Picture WHERE ID = @ID;";
+                    string tsql = "UPDATE Pet SET Name = @Name, Breed = @Breed, Age = @Age, Picture = @Picture, Latitude = @Latitude, Longitude = @Longitude WHERE ID = @ID;";
                     using (MySqlCommand cmd = new MySqlCommand(tsql, conn))
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
@@ -182,6 +184,8 @@ namespace WebApiPet.Models
                         cmd.Parameters.AddWithValue("@Breed", Breed);
                         cmd.Parameters.AddWithValue("@Age", Age);
                         cmd.Parameters.AddWithValue("@Picture", Picture);
+                        cmd.Parameters.AddWithValue("@Latitude", Latitude);
+                        cmd.Parameters.AddWithValue("@Longitude", Longitude);
                         cmd.Parameters.AddWithValue("@ID", ID);
                         cmd.ExecuteNonQuery();
                         return new ApiResponse

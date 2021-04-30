@@ -150,7 +150,9 @@ namespace AppPets.Viewmodels
                     Name = PetName,
                     Breed = PetBreed,
                     Age = PetAge,
-                    Picture = PetPicture
+                    Picture = PetPicture,
+                    Latitude = PetLatitude,
+                    Longitude = PetLongitude
                 };
                 if (pet.ID > 0)
                 {
@@ -292,7 +294,7 @@ namespace AppPets.Viewmodels
                 if (file == null)
                     return;
 
-                PetPicture = file.Path;
+                PetPicture = await new ImageService().ConvertImageFilePathToBase64(file.Path); //file.Path;
 
                 //await DisplayAlert("File Location", file.Path, "OK");
                 /*image.Source = ImageSource.FromStream(() =>
@@ -327,7 +329,7 @@ namespace AppPets.Viewmodels
                 if (file == null)
                     return;
 
-                PetPicture = file.Path;
+                PetPicture = await new ImageService().ConvertImageFilePathToBase64(file.Path); //file.Path;
 
                 //await DisplayAlert("File Location", file.Path, "OK");
                 /*image.Source = ImageSource.FromStream(() =>

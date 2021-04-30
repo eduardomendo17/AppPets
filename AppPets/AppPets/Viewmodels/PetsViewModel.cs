@@ -74,6 +74,7 @@ namespace AppPets.Viewmodels
         private async void LoadPets()
         {
             IsBusy = true;
+            PetsList = null;
             ApiResponse response = await new ApiService().GetDataAsync("Pets");
             if (response == null || !response.IsSuccess)
             {
