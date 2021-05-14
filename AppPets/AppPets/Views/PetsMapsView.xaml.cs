@@ -1,4 +1,5 @@
 ﻿using AppPets.Models;
+using AppPets.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,11 @@ namespace AppPets.Views
         public PetsMapsView(PetModel petSelected)
         {
             InitializeComponent();
+
+            // Enviamos la mascota seleccionada al control de mapas
+            petSelected.Picture = new ImageService().SaveImageFromBase64(petSelected.Picture, petSelected.ID);
+            MapPets.Pet = petSelected;
+
 
             // Centra el mapa con las coordenadas de la mascota
             MapPets.MoveToRegion(
@@ -42,9 +48,9 @@ namespace AppPets.Views
             );
 
             // Enviamos los datos de la mascota en el cuadro de texto blanco
-            PetName.Text = petSelected.Name;
+            /*PetName.Text = petSelected.Name;
             PetAge.Text = petSelected.Age.ToString();
-            PetBreed.Text = petSelected.Breed;
+            PetBreed.Text = petSelected.Breed;*/
         }
     }
 }

@@ -11,7 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPets.iOS", "AppPets\AppP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppPets", "AppPets\AppPets\AppPets.csproj", "{9A73527F-B6E0-4BB6-BB26-763298B30A16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiPet", "WebApiPet\WebApiPet.csproj", "{F50E3ECA-800C-4238-B5B0-87FB540400C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiPet", "WebApiPet\WebApiPet.csproj", "{F50E3ECA-800C-4238-B5B0-87FB540400C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items Project", "Items Project", "{A1D0FD14-D1FF-48EA-8261-B76B429796C9}"
+	ProjectSection(SolutionItems) = preProject
+		Items Project\MySQL.txt = Items Project\MySQL.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

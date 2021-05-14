@@ -10,7 +10,10 @@ namespace AppPets.Services
 {
     public class ApiService
     {
-        private string ApiUrl = "http://192.168.14.40/WebApiPet/"; //"https://localhost:44399/";
+        //private string ApiUrl = "https://localhost:44399/"; // Desarrollo local
+        //private string ApiUrl = "http://192.168.14.1:14/WebApiPet/"; // Servidor oficina
+        //private string ApiUrl = "http://impetec.ddns.net:14/WebApiPet/"; // Servidor oficina internet
+        private string ApiUrl = "http://192.168.14.26/"; // Virtual linux oficina
 
         public async Task<ApiResponse> GetDataAsync(string controller)
         {

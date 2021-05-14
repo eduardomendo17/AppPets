@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renders\MyEntryRenderer.cs" />
+    <Compile Include="Renders\MyMapRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -89,7 +90,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\MapWindow.xml" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppPets\AppPets.csproj">
       <Project>{B83BCC4D-3096-493C-9613-0960B33EF874}</Project>

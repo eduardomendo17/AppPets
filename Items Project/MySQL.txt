@@ -1,0 +1,10 @@
+CREATE TABLE `pet` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(45) DEFAULT NULL,
+  `Breed` varchar(45) DEFAULT NULL,
+  `Age` int DEFAULT NULL,
+  `Picture` longtext,
+  `Latitude` double DEFAULT NULL,
+  `Longitude` double DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+);

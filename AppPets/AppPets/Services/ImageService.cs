@@ -46,5 +46,17 @@ namespace AppPets.Services
                 return string.Empty;
             }
         }
+
+        public string SaveImageFromBase64(string imageBase64, int id)
+        {
+            if (!string.IsNullOrEmpty(imageBase64))
+            {
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), id + ".tmp");
+                byte[] data = Convert.FromBase64String(imageBase64);
+                System.IO.File.WriteAllBytes(filePath, data);
+                return filePath;
+            }
+            return string.Empty;
+        }
     }
 }

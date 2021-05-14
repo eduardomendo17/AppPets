@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppPets.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,19 +12,23 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+
+// La plantilla de elemento Control de usuario está documentada en https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace AppPets.UWP
 {
-    public sealed partial class MainPage
+    public sealed partial class MapWindow : UserControl
     {
-        public MainPage()
+        public MapWindow(PetModel pet)
         {
             this.InitializeComponent();
 
-            Xamarin.FormsMaps.Init("ArnZxmXEBBcbO7Ga1yYm1E4MefEWEuiMDU6_80rEZSoqFBOCl4rsAiRk77ch8fXe");
-
-            LoadApplication(new AppPets.App());
+            WindowPicture.Source = new BitmapImage(new Uri(pet.Picture));
+            WindowName.Text = pet.Name;
+            WindowAge.Text = pet.Age.ToString() + " años";
+            WindowBreed.Text = pet.Breed;
         }
     }
 }

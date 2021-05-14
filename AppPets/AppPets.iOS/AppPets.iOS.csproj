@@ -65,7 +65,9 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="MapWindow.cs" />
     <Compile Include="Renders\MyEntryRenderer.cs" />
+    <Compile Include="Renders\MyMapRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,5 +141,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\image_not_found.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pin2.png" />
   </ItemGroup>
 </Project>
